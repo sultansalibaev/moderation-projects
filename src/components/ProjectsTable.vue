@@ -291,6 +291,7 @@ export default {
     },
     data: () => ({
         projectStatus: {
+            moderation: 'На модераций',
             click_process: 'В очереди',
             click_work: 'проект в обработке',
             done: 'проект собран'

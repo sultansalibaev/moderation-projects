@@ -58,6 +58,11 @@ export default {
             continents: {},
             block_continents: {},
             status: {
+                moderation: {
+                    id: 'moderation',
+                    name: 'на модераций',
+                    checked: true,
+                },
                 click_process: {
                     id: 'click_process',
                     name: 'В очереди',
@@ -142,6 +147,8 @@ export default {
             let param = 'id';
             if (Number.isNaN(Number(this.input_project))) param = 'name';
 
+            console.log('temp_sorted_projects', temp_sorted_projects);
+
             this.sorted_projects = temp_sorted_projects
                 .filter(item => (item?.[param] || '').lowerIncludes(this.input_project))
                 .sort((a,b) => {
@@ -149,6 +156,8 @@ export default {
                     const b_index = b?.[param]?.indexOf(this.input_project);
                     return a_index < b_index ? -1 : 0
                 });
+
+            console.log('this.sorted_projects', this.sorted_projects);
             this.update_project_info();
         },
         getTags(tags) {
@@ -175,7 +184,7 @@ export default {
     },
     computed: {
         temp_projects() {
-            return this.sorted_projects.slice(this.selected_page * 20, (this.selected_page * 20) + 20).filter(project => this.status[project.status]?.checked)
+            return this.sorted_projects.slice(this.selected_page * 20, (this.selected_page * 20) + 20).filter(project => this.status[project.status] == undefined || this.status[project.status]?.checked)
         },
     },
     created() {
