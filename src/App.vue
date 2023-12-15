@@ -152,8 +152,8 @@ export default {
             this.sorted_projects = temp_sorted_projects
                 .filter(item => (item?.[param] || '').lowerIncludes(this.input_project))
                 .sort((a,b) => {
-                    const a_index = a?.[param]?.indexOf(this.input_project);
-                    const b_index = b?.[param]?.indexOf(this.input_project);
+                    const a_index = a?.[param]?.indexOfLowerCase(this.input_project);
+                    const b_index = b?.[param]?.indexOfLowerCase(this.input_project);
                     return a_index < b_index ? -1 : 0
                 });
 
